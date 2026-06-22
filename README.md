@@ -1,4 +1,4 @@
-# 🛡️ Enterprise Linux Troubleshooting & Diagnostics Portfolio
+#  Enterprise Linux Troubleshooting & Diagnostics Portfolio
 
 Welcome to my systems engineering ledger. This repository documents real-world production system failures, security vulnerabilities, and network infrastructure incidents diagnosed and resolved as an aspiring Cloud Support Associate. 
 
@@ -25,3 +25,24 @@ Every case study outlines empirical system logs, manual diagnostic pipelines, an
 Below is the verified terminal auditing ledger demonstrating the successfully enforced secure permissions state (`0640`).
 
 ![Identity Security Remediation](lab1_security_remediation.png)
+
+
+---
+
+##  Incident 02: Storage Infrastructure Diagnostics & Filesystem Space Remediations
+
+* **Situation:** The monitoring team raised a high-severity alert indicating that the Web Server (`192.168.54.128`) disk utilization hit 100% capacity. The local web applications crashed immediately due to a total lack of available blocks on the storage drive.
+* **Task:** Act as the Cloud Support Associate to isolate the storage utilization bottleneck, locate the specific directory consuming the space, identify the rogue file, and clear the system blockades safely.
+* **Action:**
+  1. Conducted an aggregate volume analysis to evaluate available and consumed filesystem blocks:  
+     `df -h`
+  2. Executed a targeted human-readable disk usage calculation, sorting directories by size to isolate the root folder stress:  
+     `du -h --max-depth=1 ~ | sort -h`
+  3. Safely released the locked filesystem blocks without breaking file descriptors utilizing the allocation truncation technique:  
+     `truncate -s 0 ~/app_logs/corrupt_debug.log`
+* **Result:** Remediated the critical disk space depletion error, restored the server filesystem back to an operational baseline, and verified data integrity.
+
+###  Proof of Work
+Below is the verified diagnostic logging showing the storage volumes restored back to normal, unblocked operating thresholds.
+
+![Disk Space Remediation](lab2_disk_troubleshooting.png)
