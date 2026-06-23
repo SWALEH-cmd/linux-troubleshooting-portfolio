@@ -46,3 +46,35 @@ Below is the verified terminal auditing ledger demonstrating the successfully en
 Below is the verified diagnostic logging showing the storage volumes restored back to normal, unblocked operating thresholds.
 
 ![Disk Space Remediation](lab2_disk_troubleshooting.png)
+
+
+
+---
+
+##  Incident 03: Linux Service Management & Process Telemetry Remediation
+
+* **Situation:** The infrastructure monitoring matrix triggered a critical alert indicating that the primary Nginx web application service on the Web Server (`192.168.54.128`) had entered a failed state, rendering the internal corporate gateway entirely offline.
+* **Task:** Act as the Cloud Support Associate to verify the systemd unit failure, extract the internal system daemon logs to identify the root cause of the crash, audit system process telemetry for resource blocks, and safely restore the web environment back to a stable baseline.
+* **Action:**
+  1. **Unit Triage:** Audited the core systemd unit state configuration to assess the active execution profile:  
+     `sudo systemctl status nginx`
+  2. **Log Extraction:** Extracted native system journal subsystem records to isolate low-level daemon error logs:  
+     `sudo journalctl -u nginx --no-pager -n 15`
+  3. **Telemetry Audit:** Evaluated active system process tables sorted by dynamic CPU consumption to locate resource constraints or parent/child execution hangs:  
+     `ps aux --sort=-%cpu | head -n 6`
+  4. **Service Recovery:** Executed service environment initialization controls to cycle the daemon and validated steady-state recovery:  
+     `sudo systemctl restart nginx`
+
+### Proof of Work (Step-by-Step Diagnostics)
+
+#### Step 1: Initial Service Status Assessment
+![Status Check](lab3_1_status_check.png)
+
+#### Step 2: Systemd Daemon Log Extraction
+![Journal Logs](lab3_2_journal_logs.png)
+
+#### Step 3: Process Telemetry & Resource Audit
+![Process Table](lab3_3_process_table.png)
+
+#### Step 4: Final Service Recovery Validation
+![Final Verification](lab3_4_final_verification.png)
