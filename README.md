@@ -78,3 +78,35 @@ Below is the verified diagnostic logging showing the storage volumes restored ba
 
 #### Step 4: Final Service Recovery Validation
 ![Final Verification](lab3_4_final_verification.png)
+
+
+
+---
+
+##  Incident 04: Secure Shell (SSH) Infrastructure & Local Firewall Remediation
+
+* **Situation:** The DevOps team reported a total remote access blackout on the Web Server (`192.168.54.128`). External connections via SSH were instantly refused, halting deployment pipelines and locking out all remote system administrators.
+* **Task:** Act as the Cloud Support Associate to verify local socket bindings, inspect the internal SSH daemon configuration and service logs, audit the local kernel-level firewall rules, and restore encrypted remote management paths.
+* **Action:**
+  1. **Socket Auditing:** Evaluated network runtime statistics and protocol bindings to verify socket availability on secure port 22:  
+     `sudo ss -tulpn | grep :22`
+  2. **Configuration Validation:** Executed sanity checks on the SSH daemon configuration syntax to scan for administrative runtime errors:  
+     `sudo sshd -t`
+  3. **Firewall Profiling:** Audited the kernel-level Uncomplicated Firewall (UFW) active matrix to locate egress/ingress policy bottlenecks:  
+     `sudo ufw status verbose`
+  4. **Policy Enforcement:** Applied an explicit access override rule to permit ingress traffic over TCP port 22 and recycled the transport daemon:  
+     `sudo ufw allow 22/tcp && sudo ufw reload`
+
+###  Proof of Work (Step-by-Step Diagnostics)
+
+#### Step 1: Network Socket Runtime Verification
+![Socket Audit](lab4_1_socket_audit.png)
+
+#### Step 2: SSH Daemon Configuration Subsystem Validation
+![SSHD Test](lab4_2_sshd_test.png)
+
+#### Step 3: Local Firewall Policy Profiling
+![Firewall Status](lab4_3_firewall_status.png)
+
+#### Step 4: Access Policy Enforcement & Service Validation
+![SSH Validation](lab4_4_ssh_validation.png)
